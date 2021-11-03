@@ -1,6 +1,7 @@
 package TestCases;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -58,9 +59,20 @@ public class ParentLogin {
         WebElement submitForm = shadowRoot2.findElement(By.cssSelector("button.button"));
         submitForm.submit();
         System.out.println("Sign-in button has been clicked");
-        System.out.println("Parent Profile View Page");
        
-        Thread.sleep(50000);
+        Thread.sleep(5000); 
+        
+        // Check if system has logged parent in
+        String profileViewURL = "https://staging.dvcphyfdliprj.amplifyapp.com/profile";
+        String currentURL = driver.getCurrentUrl();
+        Boolean matchURL =  currentURL.equalsIgnoreCase(profileViewURL);
+        
+        if(matchURL) {
+        	System.out.println("System has logged Parent into their account.");
+        }
+        Assert.assertTrue(matchURL);
+        
+        Thread.sleep(80000);
         
         //Close the browser
         driver.quit();

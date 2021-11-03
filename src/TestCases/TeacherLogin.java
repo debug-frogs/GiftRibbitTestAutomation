@@ -1,6 +1,7 @@
 package TestCases;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -59,7 +60,18 @@ public class TeacherLogin {
         WebElement submitForm = shadowRoot2.findElement(By.cssSelector("button.button"));
         submitForm.submit();
         System.out.println("Sign-in button has been clicked");
-        System.out.println("Teacher Profile View Page");
+        
+        Thread.sleep(5000); 
+        
+        // Check if system has logged teacher in
+        String profileViewURL = "https://staging.dvcphyfdliprj.amplifyapp.com/profile";
+        String currentURL = driver.getCurrentUrl();
+        Boolean matchURL =  currentURL.equalsIgnoreCase(profileViewURL);
+        
+        if(matchURL) {
+        	System.out.println("System has logged Teacher into their account.");
+        }
+        Assert.assertTrue(matchURL);
        
         Thread.sleep(50000);
         

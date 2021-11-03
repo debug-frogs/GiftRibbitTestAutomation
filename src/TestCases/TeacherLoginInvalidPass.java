@@ -2,12 +2,14 @@ package TestCases;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.Assert;
 
 
-public class ParentLoginInvalidCharacters {
+public class TeacherLoginInvalidPass{
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -45,12 +47,12 @@ public class ParentLoginInvalidCharacters {
         
         // Find Email Element and Input Email Address
         WebElement emailInput = shadowRoot1.findElement(By.id("email"));
-        emailInput.sendKeys("alejandra.soto.50@my.csun.edu");
+        emailInput.sendKeys("doodleboop.dale.dan.dawson@gmail.com");
         System.out.println("Email address has been entered");
         
         // Find Password Element and Input Password
         WebElement passInput = shadowRoot1.findElement(By.id("password"));
-        passInput.sendKeys("12");
+        passInput.sendKeys("wrongPassword");
         System.out.println("Invalid password has been entered");
 
         // Find Sign-in Button and Click button 
@@ -58,8 +60,19 @@ public class ParentLoginInvalidCharacters {
         WebElement submitForm = shadowRoot2.findElement(By.cssSelector("button.button"));
         submitForm.submit();
         System.out.println("Sign-in button has been clicked");
-        System.out.println("Parent is blocked");
-       
+        
+        Thread.sleep(5000); 
+        
+        // Check if system has logged teacher in or blocked and notify result
+        String profileViewURL = "https://staging.dvcphyfdliprj.amplifyapp.com/profile";
+        String currentURL = driver.getCurrentUrl();
+        Boolean matchURL =  currentURL.equalsIgnoreCase(profileViewURL);
+        
+        if(!matchURL) {
+        	System.out.println("System has blocked Teacher from logging in.");
+        }
+        Assert.assertFalse(matchURL);
+        
         Thread.sleep(50000);
         
         //Close the browser

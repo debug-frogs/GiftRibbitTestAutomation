@@ -1,6 +1,7 @@
 package TestCases;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -46,7 +47,7 @@ public class ParentLoginInvalidEmail {
         // Find Email Element and Input Email Address
         WebElement emailInput = shadowRoot1.findElement(By.id("email"));
         emailInput.sendKeys("alejandra.soto.50");
-        System.out.println("Email address has been entered");
+        System.out.println("Invalid email address has been entered");
         
         // Find Password Element and Input Password
         WebElement passInput = shadowRoot1.findElement(By.id("password"));
@@ -58,9 +59,18 @@ public class ParentLoginInvalidEmail {
         WebElement submitForm = shadowRoot2.findElement(By.cssSelector("button.button"));
         submitForm.submit();
         System.out.println("Sign-in button has been clicked");
-        System.out.println("Parent is blocked");
+        
+        // Check if system has logged teacher in or blocked and notify result
+        String profileViewURL = "https://staging.dvcphyfdliprj.amplifyapp.com/profile";
+        String currentURL = driver.getCurrentUrl();
+        Boolean matchURL =  currentURL.equalsIgnoreCase(profileViewURL); 
+        
+        if(!matchURL) {
+        	System.out.println("System has blocked Parent from logging in.");
+        }
+        Assert.assertFalse(matchURL);
        
-        Thread.sleep(9000);
+        Thread.sleep(60000);
         
         //Close the browser
         driver.quit();

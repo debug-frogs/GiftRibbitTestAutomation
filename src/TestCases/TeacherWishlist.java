@@ -72,7 +72,7 @@ public class TeacherWishlist {
         // Test remove item from wishlist
         removeItemWishlistTest(driver, editedTitle);
         
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         
         //Close the browser
         driver.quit();
@@ -210,7 +210,7 @@ public class TeacherWishlist {
         submitButton.click();
         System.out.println("Remove Item Submit Button has been clicked");
         
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         
         // Check if Test Item was removed
         List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + itemTitle + "')]"));

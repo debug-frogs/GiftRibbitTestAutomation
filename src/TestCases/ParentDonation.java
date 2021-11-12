@@ -45,8 +45,9 @@ public class ParentDonation {
         ParentLogin.loginParentTest(driver);
         
         // Find Classroom button and click button
-        WebElement classButton = driver.findElement(By.xpath("//*[@id=\"__next\"]/div/div/div[1]/div[1]/div/div/div/div[3]/div/div/div/div[2]/a"));
-        classButton.click();
+        String classroom = "Dale";
+        WebElement classButton = driver.findElement(By.xpath("/html/body/div/div/div/div[1]/div[2]/div/div[3]/div/child::*//a[contains(text(),'"+ classroom + "')]"));
+        clickUninteractableElement(classButton, driver);
         		
         Thread.sleep(10000);
         

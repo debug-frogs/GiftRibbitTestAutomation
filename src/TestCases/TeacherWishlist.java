@@ -221,15 +221,6 @@ public class TeacherWishlist {
 
 	}
 	
-	public static WebElement getShadowDOM(WebElement element, WebDriver driver) {
-		
-		// Find ShadowRoot DOM Elements using JavaScriptExecutor -___-
-		
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		WebElement shadowDom = (WebElement) js.executeScript("return arguments[0].shadowRoot", element);
-		return shadowDom;
-	}
-	
 	public static void clickUninteractableElement (WebElement element, WebDriver driver) {
 		
 		JavascriptExecutor js = (JavascriptExecutor)driver;
